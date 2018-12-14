@@ -10,6 +10,14 @@ func encode(buffer *bytes.Buffer) string {
 	return hex.EncodeToString(buffer.Bytes())
 }
 
+func Marshal(g Geometry) ([]byte, error) {
+	b, err := writeEWKB(g)
+	if err != nil {
+		return nil, err
+	}
+	return b.Bytes(), nil
+}
+
 func writeEWKB(g Geometry) (*bytes.Buffer, error) {
 	buffer := bytes.NewBuffer(nil)
 
